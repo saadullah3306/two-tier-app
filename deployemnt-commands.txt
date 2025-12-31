@@ -1,0 +1,92 @@
+    1  git clone https://github.com/saadullah3306/two-tier-app.git
+    2  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    3  chmod +x kubectl
+    4  sudo mv kubectl /usr/local/bin/kubectl
+    5  kubectl version --client
+    6  curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
+    7  chmod +x ./kind
+    8  sudo mv ./kind /usr/local/bin/kind
+    9  kind version
+   10  ls
+   11  cd two-tier-app
+   12  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+   13  chmod +x kubectl
+   14  sudo mv kubectl /usr/local/bin/kubectl
+   15  kubectl version --client
+   16  curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
+   17  chmod +x ./kind
+   18  sudo mv ./kind /usr/local/bin/kind
+   19  kind version
+   20  nano kind-config.yaml
+   21  kind create cluster --name two-tier-cluster --config=kind-config.yaml
+   22  kubectl get node
+   23  ls
+   24  nano Dockerfile
+   25  docker login
+   26  docker built -t  saadullah3306/two-tier:V1 .
+   27  docker build -t  saadullah3306/two-tier:V1 .
+   28  docker images
+   29  docker push saadullah3306/two-tier:V1  
+   30  ls
+   31  mkdir k8s-manifests
+   32  cd  k8s-manifests
+   33  mkdir namespaces
+   34  cd namespaces
+   35  kubectl create namespace flask-app
+   36  kubectl namespace mysql-db
+   37  kubectl create namespace mysql-db
+   38  kubectl get ns
+   39  touch flask-app.yaml mysql-db.yaml
+   40  cd ..
+   41  mkdir flask-app
+   42  nano deployment.yaml
+   43  kubectl apply -f deployment.yaml
+   44  nano service.yaml
+   45  kubectl apply -f service.yaml
+   46  kubectl get deployments -n flask-app
+   47  kubectl get pods -n flask-app
+   48  kubectl get deployments -n flask-app
+   49  mkdir mysql-db
+   50  nano deplyment.yaml
+   51  ls
+   52  cd flask-app
+   53  ls
+   54  nano deployment.yaml
+   55  cd ..
+   56  ls
+   57  kubectl delete -f deployment.yaml
+   58  kubectl delete -f service.yaml
+   59  ls
+   60  kubectl get deployments
+   61  kubectl get services
+   62  kubectl delete deployment flask-app
+   63  kubectl delete service flask-app
+   64  ls
+   65  cd flask-app
+   66  nano deployment.yaml
+   67  nano service.yaml
+   68  cd ..
+   69  cd mysql-db 
+   70  nano deployemnt.yaml
+   71  nano service.yaml
+   72  cd ..
+   73  kubectl apply -f k8s-manifests/flask-app
+   74  kubectl apply -f k8s-manifests/mysql-db
+   75  ls
+   76  kubectl get svc -n mysql-db
+   77  kubectl get deployments -n mysql-db
+   78  kubectl port-forward svc/flask-service 5000:5000 --adress 0.0.0.0. -n flask-app
+   79  kubectl port-forward --address 0.0.0.0 svc/flask-service 5000:5000 -n flask-app
+   80  ls
+   81  cd   k8s-manifests  
+   82  ls
+   83  cd mysql-db  
+   84  ls
+   85  nano  service.yaml
+   86  nano  deployment.yaml
+   87  nano deployemnt.yaml 
+   88  cd ..
+   89  git add .
+   90  git commit -m "file added"
+   91  git push origin master
+   92  history > deployemnt-commands.txt
